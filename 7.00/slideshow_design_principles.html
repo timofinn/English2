@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Make a Slide Deck That Doesn't Suck</title>
+<style>
+  /* ── SYSTEM FONT STACK (no Google Fonts — works on Chromebooks) ── */
+  :root {
+    --serif: Georgia, 'Times New Roman', serif;
+    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --mono: 'Courier New', Courier, monospace;
+
+    --dark:  #1E2D2C;
+    --slate: #3D5A58;
+    --teal:  #3DADA0;
+    --teal-light: #E8F5F4;
+    --teal-mid:   #B2DDD9;
+    --fog:   #F4F8F8;
+    --white: #ffffff;
+    --gold:  #C99A2E;
+    --gold-light: #FBF4E3;
+    --red:   #C0392B;
+    --red-light: #FDEDEC;
+    --label-bg:   #E0F0EF;
+    --label-text: #2C5F5D;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--fog);
+    color: var(--dark);
+    line-height: 1.7;
+    padding: 40px 24px 80px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  /* ── HEADER ── */
+  .module-label {
+    display: inline-block;
+    background: var(--label-bg);
+    color: var(--label-text);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-size: 2.8rem;
+    color: var(--dark);
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+
+  .tagline {
+    font-size: 1.05rem;
+    color: var(--slate);
+    font-weight: 400;
+    margin-bottom: 36px;
+    padding-bottom: 36px;
+    border-bottom: 1px solid var(--teal-mid);
+  }
+
+  .tagline strong { color: var(--teal); }
+
+  /* ── INTRO ── */
+  .intro {
+    background: var(--dark);
+    color: var(--white);
+    border-radius: 14px;
+    padding: 28px 32px;
+    margin-bottom: 36px;
+  }
+  .intro p { font-size: 0.97rem; line-height: 1.85; opacity: 0.9; }
+  .intro p + p { margin-top: 12px; }
+
+  /* ── SECTION HEADS ── */
+  .section-head {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    color: var(--dark);
+    margin: 44px 0 18px;
+  }
+
+  /* ── TOOL CARDS (Canva / Google Slides / Gamma) ── */
+  .tool-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 36px;
+  }
+
+  .tool-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 22px 20px;
+    border-top: 4px solid var(--teal);
+    position: relative;
+  }
+
+  .tool-card.recommended { border-top-color: var(--gold); }
+  .tool-card.basic { border-top-color: var(--slate); }
+
+  .tool-badge {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  .tool-badge.recommended { background: var(--gold-light); color: var(--gold); }
+  .tool-badge.good        { background: var(--teal-light); color: var(--teal); }
+  .tool-badge.basic       { background: #EFEFEF; color: var(--slate); }
+
+  .tool-card h3 {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    color: var(--dark);
+  }
+  .tool-card p {
+    font-size: 0.82rem;
+    color: var(--slate);
+    line-height: 1.6;
+  }
+  .tool-card .why {
+    margin-top: 10px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--slate);
+  }
+
+  /* ── PRINCIPLE ACCORDIONS ── */
+  details.principle {
+    background: var(--white);
+    border-radius: 14px;
+    margin-bottom: 14px;
+    overflow: hidden;
+    border: 1px solid var(--teal-mid);
+  }
+
+  details.principle > summary {
+    padding: 18px 24px;
+    background: var(--dark);
+    color: var(--white);
+    cursor: pointer;
+    font-family: var(--serif);
+    font-size: 1.35rem;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    user-select: none;
+  }
+  details.principle > summary::-webkit-details-marker { display: none; }
+  details.principle > summary::after {
+    content: '→';
+    transition: transform 0.25s;
+    flex-shrink: 0;
+    font-size: 1.1rem;
+  }
+  details.principle[open] > summary::after { transform: rotate(90deg); }
+
+  .principle-desc {
+    font-size: 0.82rem;
+    color: var(--teal-mid);
+    font-family: var(--sans);
+    font-weight: 400;
+    display: block;
+    margin-top: 2px;
+  }
+
+  .principle-body { padding: 24px 28px; }
+
+  /* ── BEFORE / AFTER COMPARISON ── */
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 18px 0;
+  }
+
+  .compare-card {
+    border-radius: 10px;
+    padding: 18px 20px;
+    font-size: 0.88rem;
+    line-height: 1.65;
+  }
+
+  .compare-card.bad {
+    background: var(--red-light);
+    border: 2px solid var(--red);
+  }
+  .compare-card.good {
+    background: var(--teal-light);
+    border: 2px solid var(--teal);
+  }
+
+  .compare-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .compare-card.bad  .compare-label { color: var(--red); }
+  .compare-card.good .compare-label { color: var(--teal); }
+
+  /* fake slide mockups */
+  .slide-mock {
+    border-radius: 6px;
+    padding: 12px;
+    aspect-ratio: 16/9;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+    overflow: hidden;
+    font-size: 0.75rem;
+    position: relative;
+  }
+
+  .slide-mock.bad-slide {
+    background: #FFFF99;
+    border: 2px solid #FF0000;
+    font-family: 'Comic Sans MS', cursive, var(--sans);
+    color: #8B0000;
+  }
+  .slide-mock.bad-slide .mock-title {
+    font-size: 1rem;
+    font-weight: 900;
+    color: #FF0000;
+    text-decoration: underline;
+    margin-bottom: 4px;
+    text-shadow: 1px 1px 0 #000;
+  }
+  .slide-mock.bad-slide .mock-body {
+    font-size: 0.6rem;
+    color: #000080;
+    line-height: 1.3;
+  }
+  .slide-mock.bad-slide .mock-clip {
+    position: absolute;
+    right: 6px;
+    top: 8px;
+    width: 60px;
+    height: 50px;
+    background: #ADD8E6;
+    border: 2px dashed #FF8C00;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.45rem;
+    color: #FF8C00;
+    text-align: center;
+    font-style: italic;
+  }
+
+  .slide-mock.good-slide {
+    background: #1E2D2C;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 0;
+    padding: 0;
+  }
+  .slide-mock.good-slide .mock-text-col {
+    flex: 1;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .slide-mock.good-slide .mock-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 6px;
+    font-family: Georgia, serif;
+    line-height: 1.2;
+  }
+  .slide-mock.good-slide .mock-body {
+    font-size: 0.6rem;
+    color: var(--teal-mid);
+    line-height: 1.5;
+  }
+  .slide-mock.good-slide .mock-img-col {
+    width: 40%;
+    background: linear-gradient(135deg, #3DADA0 0%, #2C4A48 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.25);
+    font-size: 0.5rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* ── RULE PILLS ── */
+  .rules-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 14px 0;
+  }
+  .rule-pill {
+    background: var(--teal-light);
+    color: var(--slate);
+    border: 1px solid var(--teal-mid);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 0.82rem;
+    font-weight: 500;
+  }
+  .rule-pill.no {
+    background: var(--red-light);
+    color: var(--red);
+    border-color: #F1948A;
+  }
+
+  /* ── COLOR PALETTE DEMO ── */
+  .palette-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 16px 0;
+  }
+  .palette-card {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.08);
+  }
+  .palette-swatches {
+    display: flex;
+    height: 52px;
+  }
+  .swatch { flex: 1; }
+  .palette-label {
+    padding: 8px 12px;
+    background: var(--white);
+    font-size: 0.75rem;
+    color: var(--slate);
+    font-weight: 500;
+  }
+  .palette-verdict {
+    font-size: 0.68rem;
+    display: block;
+    margin-top: 2px;
+    font-weight: 400;
+  }
+
+  /* ── FONT PAIRING ── */
+  .font-pair {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 12px;
+    border-left: 4px solid var(--teal);
+  }
+  .font-pair.bad-font { border-left-color: var(--red); background: var(--red-light); }
+  .font-header { font-size: 1.3rem; font-weight: 700; margin-bottom: 2px; }
+  .font-sub    { font-size: 0.85rem; color: var(--slate); }
+  .font-tag    { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--teal); margin-top: 6px; display: block; }
+  .font-tag.bad { color: var(--red); }
+
+  /* ── SPEAKER NOTES ── */
+  .notes-demo {
+    background: var(--white);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 16px 0;
+    border: 1px solid var(--teal-mid);
+  }
+  .notes-slide-preview {
+    background: #2C4A48;
+    padding: 20px 24px;
+    color: var(--white);
+    min-height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    text-align: center;
+  }
+  .notes-area {
+    background: #FFFDE7;
+    border-top: 2px solid #F9A825;
+    padding: 14px 18px;
+    font-size: 0.82rem;
+    color: #5D4037;
+    font-style: italic;
+  }
+  .notes-label {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #F9A825;
+    margin-bottom: 4px;
+    font-style: normal;
+    display: block;
+  }
+
+  /* ── CHECKLIST ── */
+  .checklist {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 32px;
+    border: 1px solid var(--teal-mid);
+  }
+  .checklist h3 {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    margin-bottom: 14px;
+    color: var(--dark);
+  }
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--teal-light);
+    font-size: 0.88rem;
+    color: var(--dark);
+    line-height: 1.5;
+  }
+  .check-item:last-child { border-bottom: none; }
+  .check-box {
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--teal-mid);
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* ── CLOSER ── */
+  .closer {
+    background: var(--dark);
+    border-radius: 14px;
+    padding: 40px 32px;
+    text-align: center;
+    color: var(--white);
+  }
+  .closer p { font-size: 0.9rem; opacity: 0.55; margin-bottom: 10px; }
+  .closer .big {
+    font-family: var(--serif);
+    font-size: 1.9rem;
+    line-height: 1.3;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    h1 { font-size: 2rem; }
+    .tool-grid { grid-template-columns: 1fr; }
+    .compare { grid-template-columns: 1fr; }
+    .palette-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<span class="module-label">Presentation Skills</span>
+<h1>Make a Deck That Doesn't Suck</h1>
+<p class="tagline">A quick guide to <strong>visual design principles</strong> for student presentations — before you open a blank slide and start typing.</p>
+
+<div class="intro">
+  <p>Most bad presentations aren't the result of bad ideas. They're the result of not thinking about design at all — opening a blank slide, picking a random color, and typing everything you want to say directly onto it.</p>
+  <p>This page gives you the principles behind what makes a slide deck actually work. Read it before you build. It'll take ten minutes and save you an hour of "why does this look terrible?"</p>
+</div>
+
+
+<!-- ── TOOL CHOICE ───────────────────────────────────────────────── -->
+<p class="section-head">First: Pick the Right Tool</p>
+
+<div class="tool-grid">
+  <div class="tool-card recommended">
+    <span class="tool-badge recommended">⭐ Recommended</span>
+    <h3>Canva</h3>
+    <p>Start from a template. The hard design work (color, layout, fonts) is already done. Your job is to replace the content — not reinvent the wheel.</p>
+    <p class="why">canva.com → search "presentation" → pick one that fits your topic's vibe.</p>
+  </div>
+  <div class="tool-card">
+    <span class="tool-badge good">Also Good</span>
+    <h3>Google Slides</h3>
+    <p>Fine — but use a theme from the "Theme" menu, not a blank deck. A blank deck with no theme is where bad slides come from.</p>
+    <p class="why">File → Theme → browse. Pick one. Commit to it.</p>
+  </div>
+  <div class="tool-card basic">
+    <span class="tool-badge basic">Advanced</span>
+    <h3>Gamma / Beautiful.ai</h3>
+    <p>AI-assisted decks that auto-layout your content. Great if you're comfortable with the content and just want it to look polished fast.</p>
+    <p class="why">gamma.app — paste your outline, pick a style.</p>
+  </div>
+</div>
+
+
+<!-- ── PRINCIPLES ACCORDIONS ─────────────────────────────────────── -->
+<p class="section-head">The Principles</p>
+
+<!-- 1. One Idea Per Slide -->
+<details class="principle">
+  <summary>
+    <span>One Idea Per Slide <span class="principle-desc">If you can't say it in a headline, it's two slides.</span></span>
+  </summary>
+  <div class="principle-body">
+    <p>The most common mistake: treating a slide like a page in a Word document. A slide is not a document. It's a visual anchor for one idea you're going to <em>say out loud</em>.</p>
+    <div class="compare" style="margin-top:16px;">
+      <div class="compare-card bad">
+        <span class="compare-label">❌ What students do</span>
+        <div class="slide-mock bad-slide">
+          <div class="mock-clip">[CLIP ART HERE]</div>
+          <div class="mock-title">ADAPTABILITY, SURVIVAL AND PRACTICALITY!!!</div>
+          <div class="mock-body">Just as a dancer must listen to the changing beat of the drum and adjust their steps, be flexible. When we insist on clinging to outdated methods of survival in the face of change, we fail. This is very true and important. Life is full of unexpected turns. It ebbs, it flows. Resist change and be left in the dust. This part is VERY important to understanding the cultural value of the proverb!!</div>
+        </div>
+        <p>Three ideas. A wall of text. A clip art box. A title with three exclamation marks.</p>
+      </div>
+      <div class="compare-card good">
+        <span class="compare-label">✓ What actually works</span>
+        <div class="slide-mock good-slide">
+          <div class="mock-text-col">
+            <div class="mock-title">The music always changes.</div>
+            <div class="mock-body">The question is never whether it will.<br>The question is whether you'll move with it.</div>
+          </div>
+          <div class="mock-img-col">[ image ]</div>
+        </div>
+        <p>One idea. One image. One line the speaker can land on. The rest is said out loud.</p>
+      </div>
+    </div>
+  </div>
+</details>
+
+<!-- 2. Visual Hierarchy -->
+<details class="principle">
+  <summary>
+    <span>Visual Hierarchy <span class="principle-desc">The eye needs a path. Give it one.</span></span>
+  </summary>
+  <div class="principle-body">
+    <p>Visual hierarchy means the most important thing on the slide is obviously the most important thing. Your eye should land on the title first, then the supporting content, then the caption or detail.</p>
+    <p style="margin-top:12px;">This is broken when everything is the same size, the same color, and the same font. If everything is emphasized, nothing is.</p>
+    <div class="rules-list" style="margin-top:16px;">
+      <span class="rule-pill">Title: 36–44pt, bold</span>
+      <span class="rule-pill">Body: 20–24pt max</span>
+      <span class="rule-pill">Caption/detail: 14–16pt, muted color</span>
+      <span class="rule-pill no">Never: same size for everything</span>
+      <span class="rule-pill no">Never: center-align body text</span>
+    </div>
+  </div>
+</details>
+
+<!-- 3. Color Palette -->
+<details class="principle">
+  <summary>
+    <span>Color Palette <span class="principle-desc">Three colors max. Everything else is noise.</span></span>
+  </summary>
+  <div class="principle-body">
+    <p>Pick a palette before you start. Most Canva templates already have one locked in — that's the whole point of using a template. If you're building from scratch, limit yourself to three colors: a background, a primary text/element color, and one accent for highlights.</p>
+    <p style="margin-top:10px;margin-bottom:16px;">The other rule: contrast. Light text on dark background. Dark text on light background. Never gray on white, never yellow on white, never red on blue.</p>
+
+    <div class="palette-grid">
+      <div class="palette-card">
+        <div class="palette-swatches">
+          <div class="swatch" style="background:#1E2D2C;"></div>
+          <div class="swatch" style="background:#3DADA0;"></div>
+          <div class="swatch" style="background:#F4F8F8;"></div>
+        </div>
+        <div class="palette-label">
+          Dark + Teal + Fog
+          <span class="palette-verdict">✓ Clean contrast, professional feel</span>
+        </div>
+      </div>
+      <div class="palette-card">
+        <div class="palette-swatches">
+          <div class="swatch" style="background:#FFFFFF;"></div>
+          <div class="swatch" style="background:#1A1A2E;"></div>
+          <div class="swatch" style="background:#C99A2E;"></div>
+        </div>
+        <div class="palette-label">
+          White + Midnight + Gold
+          <span class="palette-verdict">✓ High contrast, elegant accent</span>
+        </div>
+      </div>
+      <div class="palette-card">
+        <div class="palette-swatches">
+          <div class="swatch" style="background:#FFFF00;"></div>
+          <div class="swatch" style="background:#FF0000;"></div>
+          <div class="swatch" style="background:#0000FF;"></div>
+          <div class="swatch" style="background:#00FF00;"></div>
+          <div class="swatch" style="background:#FF00FF;"></div>
+        </div>
+        <div class="palette-label" style="color:#C0392B;">
+          Yellow + Red + Blue + Green + Pink
+          <span class="palette-verdict" style="color:#C0392B;">✗ Five colors. This is a crime.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</details>
+
+<!-- 4. Typography -->
+<details class="principle">
+  <summary>
+    <span>Typography <span class="principle-desc">Two fonts max. Choose with intention.</span></span>
+  </summary>
+  <div class="principle-body">
+    <p>A slide deck should have two fonts: one for headings, one for body text. That's it. They should feel related — one can be more decorative, the other should be highly readable at small sizes.</p>
+    <div style="margin-top:16px;">
+      <div class="font-pair">
+        <div class="font-header" style="font-family:Georgia,serif;">Georgia</div>
+        <div class="font-sub" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">paired with system sans-serif for body</div>
+        <span class="font-tag">✓ Classic, high contrast, readable</span>
+      </div>
+      <div class="font-pair">
+        <div class="font-header" style="font-family:'Arial Black',Arial,sans-serif;font-size:1.2rem;">Arial Black</div>
+        <div class="font-sub" style="font-family:Arial,sans-serif;">paired with regular Arial for body</div>
+        <span class="font-tag">✓ Bold hierarchy, minimal palette</span>
+      </div>
+      <div class="font-pair bad-font">
+        <div class="font-header" style="font-family:'Comic Sans MS',cursive;color:#8B0000;">Comic Sans</div>
+        <div class="font-sub" style="font-family:'Courier New',monospace;color:#000080;">paired with Courier New and then also Papyrus somewhere</div>
+        <span class="font-tag bad">✗ Three fonts. None of them chosen intentionally. Chaos.</span>
+      </div>
+    </div>
+    <div class="rules-list" style="margin-top:4px;">
+      <span class="rule-pill no">Never: more than 2 fonts</span>
+      <span class="rule-pill no">Never: decorative fonts for body text</span>
+      <span class="rule-pill no">Never: ALL CAPS walls of text</span>
+    </div>
+  </div>
+</details>
+
+<!-- 5. Visuals -->
+<details class="principle">
+  <summary>
+    <span>Visuals <span class="principle-desc">One strong image beats ten bullet points.</span></span>
+  </summary>
+  <div class="principle-body">
+    <p>Every slide needs a visual element. Not a floating clip art PNG from 2003 — a real, intentional image that supports the idea on the slide.</p>
+    <div class="rules-list" style="margin-top:14px;margin-bottom:14px;">
+      <span class="rule-pill">Full-bleed images: cover the whole side or half the slide</span>
+      <span class="rule-pill">Use Unsplash or Pexels (free, high quality)</span>
+      <span class="rule-pill">Search specifically — "Nigerian market crowd" not just "Africa"</span>
+      <span class="rule-pill no">Never: stretch or distort an image</span>
+      <span class="rule-pill no">Never: blurry or pixelated images</span>
+      <span class="rule-pill no">Never: floating clip art with a white background box</span>
+    </div>
+    <p style="font-size:0.88rem;color:var(--slate);">In Canva: search images directly inside the editor. In Google Slides: Insert → Image → Search the web. Both pull from licensed, high-quality sources.</p>
+  </div>
+</details>
+
+<!-- 6. White Space -->
+<details class="principle">
+  <summary>
+    <span>White Space <span class="principle-desc">Breathing room isn't wasted space. It's design.</span></span>
+  </summary>
+  <div class="principle-body">
+    <p>Cramming content edge to edge is the visual equivalent of talking without pausing. The empty space around your text and images is what lets the content breathe — and what makes the important stuff feel important.</p>
+    <p style="margin-top:10px;">A slide that looks "too empty" to you will look perfectly balanced to your audience. If you think a slide looks sparse, you're probably right on target.</p>
+    <div class="rules-list" style="margin-top:14px;">
+      <span class="rule-pill">Minimum 0.5" margin on all sides</span>
+      <span class="rule-pill">Don't fill every inch of space</span>
+      <span class="rule-pill">Fewer elements = more impact per element</span>
+    </div>
+  </div>
+</details>
+
+<!-- 7. Consistency -->
+<details class="principle">
+  <summary>
+    <span>Consistency <span class="principle-desc">A deck that looks like a deck, not a ransom note.</span></span>
+  </summary>
+  <div class="principle-body">
+    <p>Every slide should feel like it belongs to the same presentation. Same fonts. Same colors. Same spacing. Same general layout structure. This is why Canva templates work — they enforce consistency automatically.</p>
+    <p style="margin-top:10px;">When you change fonts, colors, or layouts slide-by-slide, the audience spends mental energy adjusting to the new visual — instead of listening to you.</p>
+    <div class="rules-list" style="margin-top:14px;">
+      <span class="rule-pill">Pick a template and stick to it</span>
+      <span class="rule-pill">Same title size every slide</span>
+      <span class="rule-pill">Same layout pattern for content slides</span>
+      <span class="rule-pill no">Never: different background color each slide "for variety"</span>
+      <span class="rule-pill no">Never: slide transitions set to a different effect each time</span>
+    </div>
+  </div>
+</details>
+
+<!-- 8. Speaker Notes -->
+<details class="principle">
+  <summary>
+    <span>Speaker Notes <span class="principle-desc">The slide is for them. The notes are for you.</span></span>
+  </summary>
+  <div class="principle-body">
+    <p>Speaker notes live below the slide and only you can see them during a presentation. They're where your full sentences go — the slide gets the headline, the notes get the rest.</p>
+    <p style="margin-top:10px;">If you find yourself putting long paragraphs on the slide, stop. Move that content to the speaker notes. Leave the slide with one line or one image. Say the rest.</p>
+
+    <div class="notes-demo">
+      <div class="notes-slide-preview">
+        "The music always changes."
+      </div>
+      <div class="notes-area">
+        <span class="notes-label">Speaker Notes (only you see this)</span>
+        Ask the class what they think the music represents before moving on. Wait for a few guesses. Then explain: the Igbo used this proverb to talk about survival — not dance. The music is whatever life throws at you. Your job is to move with it, not freeze. Transition: "So let's look at a story that shows exactly what happens when someone refuses to change their dance..."
+      </div>
+    </div>
+
+    <p style="font-size:0.85rem;color:var(--slate);">In Google Slides: click "View → Show Speaker Notes." In Canva: click the notes icon below each slide. In Gamma: each card has a notes field.</p>
+  </div>
+</details>
+
+<!-- 9. Slide Count -->
+<details class="principle">
+  <summary>
+    <span>Slide Count & Slide Count Discipline <span class="principle-desc">Fewer slides, more depth. Always.</span></span>
+  </summary>
+  <div class="principle-body">
+    <p>More slides does not mean a better presentation. A 20-slide deck where every slide is a bullet wall is worse than 6 slides with one idea each, delivered confidently.</p>
+    <p style="margin-top:10px;">The presentation is you. The slides are support. If you removed all the slides and just talked, the presentation should still make sense. If it doesn't — you're reading from slides, not presenting.</p>
+    <div class="rules-list" style="margin-top:14px;">
+      <span class="rule-pill">Aim for roughly 1 slide per minute of talk time</span>
+      <span class="rule-pill">Title slide + 4–6 content slides is often enough</span>
+      <span class="rule-pill no">Never: a separate slide just for "Thank you!"</span>
+      <span class="rule-pill no">Never: reading directly from the slide word for word</span>
+    </div>
+  </div>
+</details>
+
+
+<!-- ── PRE-SUBMIT CHECKLIST ──────────────────────────────────────── -->
+<p class="section-head">Before You Submit</p>
+
+<div class="checklist">
+  <h3>The Squint Test + Checklist</h3>
+  <p style="font-size:0.85rem;color:var(--slate);margin-bottom:16px;">Squint at each slide from arm's length. If you can't tell what the main point is — redesign it. Then run through this list.</p>
+
+  <div class="check-item"><div class="check-box"></div><span>Every slide has one clear main idea</span></div>
+  <div class="check-item"><div class="check-box"></div><span>I used two fonts maximum, consistently across all slides</span></div>
+  <div class="check-item"><div class="check-box"></div><span>My color palette is 3 colors or fewer</span></div>
+  <div class="check-item"><div class="check-box"></div><span>Every slide has at least one image or visual element (not clip art)</span></div>
+  <div class="check-item"><div class="check-box"></div><span>Text is not covering the entire slide — there's breathing room</span></div>
+  <div class="check-item"><div class="check-box"></div><span>All slides look like they belong to the same presentation</span></div>
+  <div class="check-item"><div class="check-box"></div><span>I can read every word from the back of a room (minimum 20pt)</span></div>
+  <div class="check-item"><div class="check-box"></div><span>I added speaker notes so I don't have to memorize or read from the slide</span></div>
+  <div class="check-item"><div class="check-box"></div><span>I can present this without looking at the screen the whole time</span></div>
+</div>
+
+
+<div class="closer">
+  <p>The slides are a backdrop.</p>
+  <div class="big">You're the presentation.</div>
+</div>
+
+</body>
+</html>
