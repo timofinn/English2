@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Annotated Interview Exemplar — Kaitlin</title>
+<style>
+  /* ─── Base ─── */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 11pt;
+    line-height: 1.75;
+    color: #1a1a1a;
+    background: #f9f7f2;
+    padding: 48px 0;
+  }
+  .page {
+    max-width: 820px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 52px 64px 72px 64px;
+    box-shadow: 0 2px 24px rgba(0,0,0,0.08);
+  }
+
+  /* ─── Header ─── */
+  .doc-header {
+    border-bottom: 2px solid #3b3b2f;
+    padding-bottom: 18px;
+    margin-bottom: 28px;
+  }
+  .doc-header .label {
+    font-family: 'Arial', sans-serif;
+    font-size: 8.5pt;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #777;
+    margin-bottom: 6px;
+  }
+  .doc-header h1 {
+    font-size: 22pt;
+    font-weight: normal;
+    color: #2a2a1e;
+    margin-bottom: 4px;
+  }
+  .doc-header .sub {
+    font-size: 10.5pt;
+    color: #555;
+    font-style: italic;
+  }
+
+  /* ─── Legend ─── */
+  .legend-section {
+    background: #f5f3ec;
+    border: 1px solid #ddd9cc;
+    border-radius: 6px;
+    padding: 22px 26px 20px 26px;
+    margin-bottom: 36px;
+  }
+  .legend-section h2 {
+    font-family: 'Arial', sans-serif;
+    font-size: 9.5pt;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #555;
+    margin-bottom: 14px;
+  }
+  .legend-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px 24px;
+  }
+  .legend-col h3 {
+    font-family: 'Arial', sans-serif;
+    font-size: 8.5pt;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #ddd;
+  }
+  .legend-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 7px;
+    font-size: 9.5pt;
+    line-height: 1.4;
+  }
+  .legend-swatch {
+    display: inline-block;
+    min-width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    margin-top: 1px;
+    flex-shrink: 0;
+  }
+  .legend-text strong {
+    display: block;
+    font-size: 9pt;
+  }
+  .legend-text span {
+    color: #666;
+    font-size: 8.5pt;
+    font-style: italic;
+  }
+
+  /* ─── Highlight colors ─── */
+  /* VERBAL MOVES — warm yellows/greens */
+  .paraphrase        { background: #fff3b0; border-bottom: 2px solid #d4a800; padding: 0 2px; border-radius: 2px; }
+  .followup          { background: #d4edda; border-bottom: 2px solid #3a8a52; padding: 0 2px; border-radius: 2px; }
+  .personal          { background: #fde8d8; border-bottom: 2px solid #c0622a; padding: 0 2px; border-radius: 2px; }
+  .emotional         { background: #e8d5f5; border-bottom: 2px solid #7b3fa0; padding: 0 2px; border-radius: 2px; }
+  .minimal           { background: #d0ecf7; border-bottom: 2px solid #2176ae; padding: 0 2px; border-radius: 2px; }
+  .summarize         { background: #ffd6d6; border-bottom: 2px solid #b02020; padding: 0 2px; border-radius: 2px; }
+  /* STRUCTURAL MOVES — darker, distinct */
+  .onramp            { background: #dff5e1; border-bottom: 2px solid #2a7a40; padding: 0 2px; border-radius: 2px; }
+  .circling          { background: #fff0d4; border-bottom: 2px solid #b07a00; padding: 0 2px; border-radius: 2px; }
+  .specific-memory   { background: #ffe4f0; border-bottom: 2px solid #a0306a; padding: 0 2px; border-radius: 2px; }
+  /* NONVERBAL — subtle dotted underline */
+  .nonverbal         { border-bottom: 2.5px dotted #888; padding: 0 2px; }
+
+  /* ─── Transcript ─── */
+  .transcript-section h2 {
+    font-family: 'Arial', sans-serif;
+    font-size: 9.5pt;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #555;
+    margin-bottom: 20px;
+  }
+  .turn {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 0 16px;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #f0ece2;
+  }
+  .turn:last-child { border-bottom: none; }
+  .speaker {
+    font-family: 'Arial', sans-serif;
+    font-size: 8.5pt;
+    font-weight: bold;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding-top: 2px;
+    color: #555;
+  }
+  .speaker.kaitlin { color: #2a5fa0; }
+  .speaker.finn    { color: #4a4a3a; }
+  .speaker.note    { color: #999; font-weight: normal; font-style: italic; text-transform: none; letter-spacing: 0; font-size: 8pt; }
+  .text { font-size: 10.5pt; }
+
+  /* ─── Annotation tags ─── */
+  .tag {
+    display: inline-block;
+    font-family: 'Arial', sans-serif;
+    font-size: 7.5pt;
+    font-weight: bold;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 1px 5px;
+    border-radius: 3px;
+    vertical-align: middle;
+    margin-left: 4px;
+    white-space: nowrap;
+    opacity: 0.85;
+  }
+  .tag-paraphrase      { background: #fff3b0; color: #7a6000; border: 1px solid #d4a800; }
+  .tag-followup        { background: #d4edda; color: #1e5c30; border: 1px solid #3a8a52; }
+  .tag-personal        { background: #fde8d8; color: #7a3210; border: 1px solid #c0622a; }
+  .tag-emotional       { background: #e8d5f5; color: #4a1a70; border: 1px solid #7b3fa0; }
+  .tag-minimal         { background: #d0ecf7; color: #0d4a72; border: 1px solid #2176ae; }
+  .tag-summarize       { background: #ffd6d6; color: #6a0000; border: 1px solid #b02020; }
+  .tag-onramp          { background: #dff5e1; color: #0f4020; border: 1px solid #2a7a40; }
+  .tag-circling        { background: #fff0d4; color: #5a3a00; border: 1px solid #b07a00; }
+  .tag-memory          { background: #ffe4f0; color: #600030; border: 1px solid #a0306a; }
+  .tag-nonverbal       { background: #eee; color: #444; border: 1px solid #aaa; }
+
+  /* ─── Interruption note ─── */
+  .interruption {
+    grid-column: 1 / -1;
+    font-style: italic;
+    font-size: 9pt;
+    color: #999;
+    padding: 6px 10px;
+    background: #f8f8f6;
+    border-left: 3px solid #ddd;
+    border-radius: 2px;
+    margin-bottom: 4px;
+  }
+
+  /* ─── Footer note ─── */
+  .footer-note {
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+    font-family: 'Arial', sans-serif;
+    font-size: 8.5pt;
+    color: #888;
+    line-height: 1.5;
+  }
+  .footer-note strong { color: #555; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ─── HEADER ─── -->
+  <div class="doc-header">
+    <div class="label">Narrative Medicine, Unit 6 &nbsp;|&nbsp; Annotated Interview Exemplar</div>
+    <h1>A Life Worth Listening To</h1>
+    <div class="sub">Interviewer: Kaitlin &nbsp;·&nbsp; Subject: Finn (English Department Co-Chair) &nbsp;·&nbsp; Recorded at school site</div>
+  </div>
+
+  <!-- ─── LEGEND ─── -->
+  <div class="legend-section">
+    <h2>Color-Coded Legend — Listening Moves</h2>
+    <div class="legend-grid">
+
+      <div class="legend-col">
+        <h3>Verbal Moves</h3>
+        <div class="legend-item">
+          <div class="legend-swatch paraphrase"></div>
+          <div class="legend-text"><strong>Paraphrase</strong><span>Reflect back in your own words</span></div>
+        </div>
+        <div class="legend-item">
+          <div class="legend-swatch followup"></div>
+          <div class="legend-text"><strong>Follow-up Question</strong><span>Grows directly from what was just said</span></div>
+        </div>
+        <div class="legend-item">
+          <div class="legend-swatch personal"></div>
+          <div class="legend-text"><strong>Personal Connection</strong><span>Name something from your own experience</span></div>
+        </div>
+        <div class="legend-item">
+          <div class="legend-swatch emotional"></div>
+          <div class="legend-text"><strong>Emotional Tracking</strong><span>Name what you hear beneath the words</span></div>
+        </div>
+        <div class="legend-item">
+          <div class="legend-swatch minimal"></div>
+          <div class="legend-text"><strong>Minimal Encourager</strong><span>"Say more" / "Yeah" / "Mm-hmm"</span></div>
+        </div>
+        <div class="legend-item">
+          <div class="legend-swatch summarize"></div>
+          <div class="legend-text"><strong>Summarizing Before Moving On</strong><span>"So if I'm hearing you right…"</span></div>
+        </div>
+      </div>
+
+      <div class="legend-col">
+        <h3>Structural Moves</h3>
+        <div class="legend-item">
+          <div class="legend-swatch onramp"></div>
+          <div class="legend-text"><strong>On-Ramp</strong><span>Give context before asking — don't fire cold</span></div>
+        </div>
+        <div class="legend-item">
+          <div class="legend-swatch circling"></div>
+          <div class="legend-text"><strong>Circling Back</strong><span>"You mentioned X earlier — can we go back?"</span></div>
+        </div>
+        <div class="legend-item">
+          <div class="legend-swatch specific-memory"></div>
+          <div class="legend-text"><strong>Asking for a Specific Memory</strong><span>"Is there a moment that stands out?"</span></div>
+        </div>
+      </div>
+
+      <div class="legend-col">
+        <h3>Nonverbal Moves</h3>
+        <div class="legend-item">
+          <div class="legend-swatch nonverbal" style="background:#eee;border-bottom:2.5px dotted #888;"></div>
+          <div class="legend-text"><strong>Silence / Holding Space</strong><span>Letting the subject's last word land before moving on</span></div>
+        </div>
+        <br>
+        <h3 style="margin-top:8px;">Move Tags</h3>
+        <div style="font-size:8.5pt;color:#666;line-height:1.6;">
+          Each highlighted phrase is followed by a small tag naming the move.<br>
+          Count the tags to check your minimum of <strong>10 annotated moments</strong>.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ─── TRANSCRIPT ─── -->
+  <div class="transcript-section">
+    <h2>Annotated Transcript</h2>
+
+    <!-- Narrator note -->
+    <div class="turn">
+      <div class="speaker note">[Kaitlin, narrating]</div>
+      <div class="text" style="color:#999;font-style:italic;font-size:9.5pt;">
+        All right, so this is me just testing out the concept I'm asking them to do. Shall we start?
+      </div>
+    </div>
+
+    <div class="turn">
+      <div class="speaker finn">Finn</div>
+      <div class="text">Sure.</div>
+    </div>
+
+    <!-- TURN 1 — Kaitlin opening question -->
+    <div class="turn">
+      <div class="speaker kaitlin">Kaitlin</div>
+      <div class="text">
+        <span class="onramp">Um, we can start just introducing yourself.</span><span class="tag tag-onramp">On-Ramp</span>
+        Like, what do you do at Penol, both in and outside of the classroom? Like what does your life look like?
+      </div>
+    </div>
+
+    <!-- TURN 2 — Finn responds, asks for clarification -->
+    <div class="turn">
+      <div class="speaker finn">Finn</div>
+      <div class="text">
+        So, inside the classroom, I'm a teacher, an English teacher, and I — do you want me to talk about some of my values as a teacher or some of the units that we've been talking about? Or, like, routines? What do I think is helpful?
+      </div>
+    </div>
+
+    <!-- TURN 3 — Kaitlin clarifies -->
+    <div class="turn">
+      <div class="speaker kaitlin">Kaitlin</div>
+      <div class="text">
+        Um, I think it's helpful, especially when you're starting out in your first few years to take an experimental mindset to the curriculum you're developing —
+        <span class="minimal">Yeah.</span><span class="tag tag-minimal">Minimal Encourager</span>
+      </div>
+    </div>
+
+    <!-- TURN 4 — Finn continues -->
+    <div class="turn">
+      <div class="speaker finn">Finn</div>
+      <div class="text">
+        — put that in combination with a capacity to do some naval gazing reflections on what didn't go well, and having a system in place, probably the most important, to make it better the next time. Especially the first years running.
+      </div>
+    </div>
+
+    <div class="turn">
+      <div class="speaker kaitlin">Kaitlin</div>
+      <div class="text"><span class="minimal">Yeah.</span><span class="tag tag-minimal">Minimal Encourager</span> Um, sorry, I'm already going into some of this stuff. You wanted me to talk about what I do outside the classroom?</div>
+    </div>
+
+    <div class="turn">
+      <div class="speaker kaitlin">Kaitlin</div>
+      <div class="text">Um, like your role as a teacher — um, what else do you do at the school, things like that?</div>
+    </div>
+
+    <div class="turn">
+      <div class="speaker finn">Finn</div>
+      <div class="text">
+        Oh, my role within the institution itself. Yeah, so I'm involved as a co-chair of the English department with Mr. McElroy. There are currently, I think, around seven teachers and two student teachers. And… I actually just met with Mac for the collaborative PD this morning — which we do once a month — where there's an open-ended professional development that you choose who to work with. And we talked about, uh, kind of where we're going to go in this conversation, which is: a deliverable. Like a project deliverable that is just unambiguously helpful for somebody who is stepping into the role of an English teacher and needs curriculum. And also other teachers who want to see whatever teachers have created, right? So we're gonna basically try to set up an artifact within Google Drive that shows exactly, at a glance, what the unit's about, the work that's covered, and the summative assessment. And within that, there's a couple of other things — like the essential questions it's addressing, what the overarching value being nudged is, in terms of a standard. Um, and I could talk about any of that in the context of the unit we're on right now. But all of that to say, we want this to be actually useful for people. Right? So if you're shopping for a unit to do, you can pull it off the shelf, and in one minute, understand what this thing is about.
+      </div>
+    </div>
+
+    <!-- TURN — Kaitlin follow-up: seven? -->
+    <div class="turn">
+      <div class="speaker kaitlin">Kaitlin</div>
+      <div class="text">
+        <span class="followup">Seven? Do we have that many?</span><span class="tag tag-followup">Follow-up Question</span>
+      </div>
+    </div>
+
+    <div class="turn">
+      <div class="speaker finn">Finn</div>
+      <div class="text">I think so. I think it's around seven. And… that's all to support new teachers that are coming in that would like curriculum — and by no means do you have to do it the way it's prescribed or the way it's laid out, but just so that it's useful. Because, I think — this comes from hard-won experience on my part — when you're building it all from the ground up, from limited materials, it would be really nice to have things prebuilt that you can make a copy of and modify. Would save a lot of time. But it's also one of the most enjoyable aspects of the job.</div>
+    </div>
+
+    <div class="turn">
+      <div class="speaker kaitlin">Kaitlin</div>
+      <div class="text"><span class="minimal">Mm-hmm.</span><span class="tag tag-minimal">Minimal Encourager</span> That's true. Yeah.</div>
+    </div>
+
+    <!-- Key question: co-chair -->
+    <div class="turn">
+      <div class="speaker kaitlin">Kaitlin</div>
+      <div class="text">
+        <span class="followup">How has being a co-chair in your first year at this site felt?</span><span class="tag tag-followup">Follow-up Question</span>
+      </div>
+    </div>
+
+    <div class="turn">
+      <div class="speaker finn">Finn</div>
+      <div class="text">
+        Um, so, when I came into this place, I just wanted to be helpful, right? I wanted to be active. I wanted to understand the levers and mechanisms of decision making, because I hadn't been in any kind of campus leadership role before. I've peeked behind the curtain, both at the department level and the inter-department level — which is actually even more harrowing. How has it been? Uh, I would say… I played it too safe at the front end, especially with ILT. I didn't want to come in — the new guy — throwing my weight around. And I kind of sat in the back seat, even though I'm signaling to other people: "I want to be a leader" — but I don't want to tell you what to do, which is a weird cognitive dissonance. And then that kind of waned around the end of the first semester. I was like, Oh, they actually kind of want me to tell them what to do. They're asking me to be a leader. I need to be more involved, more managerial in my approach. Just like — don't worry about rubbing people the wrong way. Just build something. And let it rip. It's okay if you bump heads. It's better that you're in the arena getting dusty than sitting on the sidelines for fear of ruffling feathers.
+      </div>
+    </div>
+
+    <div class="turn">
+      <div class="speaker kaitlin">Kaitlin</div>
+      <div class="text"><span class="minimal">Yeah. You get where I'm going with that?</span><span class="tag tag-minimal">Minimal Encourager</span> That makes sense. Took me a semester to learn that.</div>
+    </div>
+
+    <!-- Personal connection + on-ramp for next question -->
+    <div class="turn">
+      <div class="speaker kaitlin">Kaitlin</div>
+      <div class="text">
+        Um, no — that actually relates to one of my last questions, which is:
+        <span class="personal">one thing that I was wrestling with for the newsletter was I didn't want to be the student teacher saying, "this is the thing that I really want you to use, use it now" — especially when it came to sending reminder emails, when it came to bringing it up in department meetings.</span><span class="tag tag-personal">Personal Connection</span>
+        <span class="onramp">So my question would be — as I move into my first year teaching — what are some attributes that you think I should carry forward versus step back from?</span><span class="tag tag-onramp">On-Ramp</span>
+      </div>
+    </div>
+
+    <!-- Interruption -->
+    <div class="turn">
+      <div class="speaker note" style="grid-column:1/-1;">
+        <div class="interruption">[Interruption — a colleague enters to ask about printing. Brief exchange. Kaitlin navigates it, then resumes.]</div>
+      </div>
+    </div>
+
+    <div class="turn">
+      <div class="speaker finn">Finn</div>
+      <div class="text">
+        Um, yeah — I, you — it sounds like you and I struggle with the same doubt. I call it doubt. Or it's more like conscientiousness, if you want to give it a nicer framework. We're both acutely aware of how busy other people are, and that by putting another thing on their plate, it's just overwhelming them more. But you're also driven by this desire to — well, like: "I have this thing, that's pretty cool. It actually serves a function. And if everybody participates, it actually could help with intra-departmental transparency." And I think that's really important, especially in as siloed an institution as this place. Um… let it rip. Let it rip. Don't worry. If they don't want to participate, they have the option to just ignore your email. Right?
+      </div>
+    </div>
+
+    <div class="turn">
+      <div class="speaker kaitlin">Kaitlin</div>
+      <div class="text"><span class="minimal">Shoot, yeah.</span><span class="tag tag-minimal">Minimal Encourager</span></div>
+    </div>
+
+    <div class="turn">
+      <div class="speaker finn">Finn</div>
+      <div class="text">
+        But then your system — I know that you're worried about that — because if only a couple of teachers participate, it kind of flies in the face of the whole purpose of it in the first place, which is to know what other people are doing in their classrooms. So are you asking me: how do you nudge these people so that everyone participates in as frictionless a way as possible?
+      </div>
+    </div>
+
+    <!-- Kaitlin re-steers and asks for a reaction -->
+    <div class="turn">
+      <div class="speaker kaitlin">Kaitlin</div>
+      <div class="text">
+        Or — I think — your perspective on a new teacher coming in and saying, "Here's this tool."
+        <span class="followup">Um, how did that land for you?</span><span class="tag tag-followup">Follow-up Question</span>
+      </div>
+    </div>
+
+    <div class="turn">
+      <div class="speaker finn">Finn</div>
+      <div class="text">
+        Love it. We need… we need more Kaitlins in the department, right? I would much rather see somebody — what that is — this is evidence of you going beyond your own personal bubble of what you're focused on immediately, and you're trying to help the department as a cohesive unit. Because right now, I know — and I know you know — it lacks coherence: horizontal and vertical alignment, right? Those are systemic and structural issues. Hopefully, look — there's a whole continuum, right? One end is: they hand you curriculum and say, "Teach this to the letter. Do not deviate." That's one model. And I hope you don't get that model, 'cause that sucks. I've had that. It's awful. The other end is where we are. And that is: "You teach this class, you teach that class. It's the same course. Good luck." And you get widespread disparities. The kids are getting vastly different experiences based on the educator in the room. The truth is, it's probably better to have some meeting in the middle. Some things need to be standardized, and there has to be a respect for academic freedom and curricular development.
+      </div>
+    </div>
+
+    <div class="turn">
+      <div class="speaker kaitlin">Kaitlin</div>
+      <div class="text">I think you did. Um — which relates to an extension: the newsletter. Open on a question: <span class="followup">what are your thoughts on the newsletter? How has it landed for you?</span><span class="tag tag-followup">Follow-up Question</span></div>
+    </div>
+
+    <div class="turn">
+      <div class="speaker finn">Finn</div>
+      <div class="text">
+        Um, yeah. So I think it's fantastic, and I think it's a tool that needs to scale. It's easily scalable, and what you created takes three minutes — or five minutes if you want to be thorough — to fill in for each person in the department. And they're making a wager: do I actually want to know what's going on in other classrooms? The ones who do probably contribute, right? The ones who don't probably don't care about intra-departmental transparency. And that kind of gives you the data you need, right? Not everybody does care.
+      </div>
+    </div>
+
+    <!-- Kaitlin does a paraphrase + redirects to form -->
+    <div class="turn">
+      <div class="speaker kaitlin">Kaitlin</div>
+      <div class="text">
+        <span class="paraphrase">Um, but in terms of its form and function — let's go into the form itself. You were trying to strike a balance between getting good data and not overwhelming the end user with prompts. Am I right about that?</span><span class="tag tag-paraphrase">Paraphrase</span>
+        <span class="followup">Yeah. How do you think you did with that project of asking enough questions to get good data — but not too many, to where they shut the tab out of overwhelm?</span><span class="tag tag-followup">Follow-up Question</span>
+      </div>
+    </div>
+
+    <div class="turn">
+      <div class="speaker finn">Finn</div>
+      <div class="text">
+        Um, I think… it's been going well. I think I've gotten responses during every cycle — just a matter of quantity. And that's usually correlated with grades, or due dates, or we just hit a break that everyone's stumbling back from. Um, and there are, of course, people that I have never gotten a response from. So I'm interested to hear their perspective as well.
+      </div>
+    </div>
+
+    <div class="turn">
+      <div class="speaker kaitlin">Kaitlin</div>
+      <div class="text">
+        <span class="emotional">You probably don't even need to say the names — I would know.</span><span class="tag tag-emotional">Emotional Tracking</span>
+        <span class="followup">Yeah. So as far as form — I'm curious: when a newsletter comes out and hits your inbox, what do you do? Like, do you read the whole thing? Do you skim it?</span><span class="tag tag-followup">Follow-up Question</span>
+      </div>
+    </div>
+
+    <div class="turn">
+      <div class="speaker finn">Finn</div>
+      <div class="text">
+        I read the whole thing, because I think it's designed and built to be digestible in like 90 seconds or 2 minutes when I read it. And it's supremely helpful — because I'm like, "Oh, this person needs help with this." I think it's a great tool, and I love the automaticity of it. It's a rolling tool that moves through current units, and all it takes is you to launch it, right? Like to send the link to it. I think the tool itself is great. You just have to limit the amount of friction involved in getting the data you need.
+      </div>
+    </div>
+
+    <!-- Circling Back move -->
+    <div class="turn">
+      <div class="speaker kaitlin">Kaitlin</div>
+      <div class="text">
+        <span class="circling">Yeah. How has the newsletter sparked any conversations with other department members about what they're doing — informally or formally?</span><span class="tag tag-circling">Circling Back</span>
+      </div>
+    </div>
+
+    <div class="turn">
+      <div class="speaker finn">Finn</div>
+      <div class="text">
+        Yeah, but I kind of already do that with Mac. I need to be more in communication with Brady and Barrett. And I also respect Ojeda and Elliot, too — but Brady and Barrett stand out to me as consummate professionals with a rich repository of field experience that I could truly benefit from, and I haven't availed myself of that — mainly because during lunch I have too many students in my room, and I gotta kick them out. That's like the only time you have to interface with other staff. But I don't want to stray too far from the newsletter. Let's keep going.
+      </div>
+    </div>
+
+    <div class="turn">
+      <div class="speaker kaitlin">Kaitlin</div>
+      <div class="text"><span class="minimal">Sure.</span><span class="tag tag-minimal">Minimal Encourager</span></div>
+    </div>
+
+    <!-- Emotional / shift question -->
+    <div class="turn">
+      <div class="speaker kaitlin">Kaitlin</div>
+      <div class="text">
+        <span class="emotional">Has it shifted anything for you — teaching-wise, or collaboratively — how you view the department?</span><span class="tag tag-emotional">Emotional Tracking</span>
+      </div>
+    </div>
+
+    <div class="turn">
+      <div class="speaker finn">Finn</div>
+      <div class="text">
+        Yeah, so if anything, it's shone a spotlight on the lack — well, on two things: how siloed things are, classroom by classroom, and the lack of awareness and transparency between one classroom and the next. And if that's something that we value — if we truly do value horizontal alignment — then we should preserve the tool. And there are also instances where I notice everyone is doing a multimedia unit, or everyone is doing something related to film, that open up conversations around: "We could collaborate on this." Even at the collaboration day, Barrett and Ojeda were saying they should collaborate on Romeo and Juliet. Things like that. I wish — so — Berkeley High has a weekly collaboration within departments. And having that weekly container actually has an efficacy that we don't achieve here, because I really disagree with this once-a-month model of meeting with different groups. There's just too much of a gap of time. If it wasn't immediately acted upon, then you walk away like, "Okay, let's have a moratorium on this discussion, and we'll check back in a month." It's just wildly ineffective.
+      </div>
+    </div>
+
+    <!-- Level 3 question — how does this make you feel -->
+    <div class="turn">
+      <div class="speaker kaitlin">Kaitlin</div>
+      <div class="text">
+        <span class="followup">How does that make you feel going into next year, and what you might want to change?</span><span class="tag tag-followup">Follow-up Question</span>
+      </div>
+    </div>
+
+    <div class="turn">
+      <div class="speaker finn">Finn</div>
+      <div class="text">
+        I… I have a lot of reformation ideas, both for ILT and at the departmental level. I don't think anybody can doubt that we can be more effective as a group than what we've been this year. We need to figure out why we don't turn talk into action. Right? Talk is cheap. Everybody's great at armchair analysis — "this is what needs to be done." But it's the implementation that matters. Otherwise, it's all just ephemeral talk that dissipates. So one thing I want to do — just from a policy standpoint — is breakout groups: focus sessions where you are working on a specific goal that's manageable for two or three of you to get done in the time frame you have, right then and there. So make it manageable. At the end of the meeting, you should have gotten something done — other than a conversation. Like your newsletter. <span class="specific-memory">How long did it take you to build it? Like — if you had to rebuild it right now, could you do it in an hour?</span>
+      </div>
+    </div>
+
+    <div class="turn">
+      <div class="speaker kaitlin">Kaitlin</div>
+      <div class="text">
+        <span class="specific-memory">I think so. Yeah.</span><span class="tag tag-memory">Asking for Specific Memory</span>
+      </div>
+    </div>
+
+    <div class="turn">
+      <div class="speaker finn">Finn</div>
+      <div class="text">
+        So that's what I'm thinking. We have a model like that. And you would, in terms of collaboration, help another department — whoever wants it — work with those department heads to build it with them in an hour. Show them how it functions, and then go: "Now it's in your hands. This is how it runs. Good luck."
+      </div>
+    </div>
+
+    <!-- Kaitlin personal connection -->
+    <div class="turn">
+      <div class="speaker kaitlin">Kaitlin</div>
+      <div class="text">
+        <span class="personal">That's what I was trying to do with the discussion tracker document that I shared in the most recent newsletter — where I was just like, "This is how I created this. This is how it works. Now use it if you want it." I just left it how it was.</span><span class="tag tag-personal">Personal Connection</span>
+      </div>
+    </div>
+
+    <div class="turn">
+      <div class="speaker finn">Finn</div>
+      <div class="text">
+        I love that. I saved a copy of it. I think the more you do that kind of stuff, the more other teachers — whether or not they say anything to you — respect you as a professional, because you're trying to help the community. You're not just head-down in your own classroom all the time. You're thinking about ways that: "Hey, there are 200 other people in the same situation as me. I think I figured out something pretty cool. Let me put it out there for them." Don't shy away from that. Even if it asks something of other people. Because ultimately, it all asks something — it asks of a finite resource, which is their attention. So even if you build a tutorial video with screen recordings, that's more helpful than sitting on the sidelines because you're worried about how busy they are. If they're too busy, they'll ignore it. Right?
+      </div>
+    </div>
+
+    <div class="turn">
+      <div class="speaker kaitlin">Kaitlin</div>
+      <div class="text"><span class="minimal">Yeah.</span><span class="tag tag-minimal">Minimal Encourager</span></div>
+    </div>
+
+    <div class="turn">
+      <div class="speaker finn">Finn</div>
+      <div class="text">
+        And there'll be no consequence, which is what the model we have now, right? But I think you and I can both agree that there are demonstrable ways we can do a better job working together. We just gotta roll up our sleeves and do the thing. Just build it.
+      </div>
+    </div>
+
+    <!-- Summarizing + closing question -->
+    <div class="turn">
+      <div class="speaker kaitlin">Kaitlin</div>
+      <div class="text">
+        <span class="summarize">And just do the thing.</span><span class="tag tag-summarize">Summarizing Before Moving On</span>
+        Um — is there anything I haven't asked that you think matters in regards to newsletter collaboration? And then the other thread that was running was you being a new member of an English department somewhere else — talking about that, right?
+      </div>
+    </div>
+
+    <div class="turn">
+      <div class="speaker finn">Finn</div>
+      <div class="text">
+        Um, I think — just take that spirit you brought to the newsletter of: "I'm genuinely trying to be helpful and build something useful here for other people." And yeah, just don't shy away from sharing it. Just share it. Because I built something and didn't share it — which was my PowerSchool comment bank. Which I found really useful when it comes to progress reports. Why didn't I share it? I had a whole spiel. I woke up at 5 in the morning to build it before a community meeting, and it got canceled. And I was a little bit sour about not being able to do it, but I was like — there's nothing stopping me from just pushing it out. Send it out there. Just put your work out there. Here's an analogy for you. Certain creative types — like musicians and artists — they fall in love with their own perfectionism. They fall in love with their perfect ideal of what something could be. Don't fall in that trap. Share an imperfect model. It's better to trade perfect for done. You can try to finesse things as much as possible, but eventually the bell rings and you have to show something. Don't worry about it being in perfect order. Just get it in a presentable condition and launch it. With your tools, with your curriculum. And you'll be a lot more productive.
+      </div>
+    </div>
+
+    <div class="turn">
+      <div class="speaker kaitlin">Kaitlin</div>
+      <div class="text">Makes sense to me. Um — well, those are all the questions that I have. Thank you so much for taking the time.</div>
+    </div>
+
+    <div class="turn">
+      <div class="speaker finn">Finn</div>
+      <div class="text">Yeah — now, so what I'm going to do is see if this conversation got the full transcript, and I'm going to try to drag it over into a doc and analyze it through the lens that we're using with any of these things. Thanks for giving me this data. I'm going to try to lead from the front. Yeah, let me know what the students pick up on, what they notice.</div>
+    </div>
+
+    <!-- Closing narrator note -->
+    <div class="turn">
+      <div class="speaker note">[Kaitlin, narrating]</div>
+      <div class="text" style="color:#999;font-style:italic;font-size:9.5pt;">
+        [Recording ends. A brief exchange about a clipboard task follows — separate from the interview.]
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ─── MOVE COUNT SUMMARY ─── -->
+  <div style="margin-top:40px;padding:20px 24px;background:#f5f3ec;border:1px solid #ddd9cc;border-radius:6px;">
+    <div style="font-family:Arial,sans-serif;font-size:9pt;font-weight:bold;letter-spacing:0.08em;text-transform:uppercase;color:#555;margin-bottom:12px;">Move Count — At a Glance</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;font-size:9pt;">
+      <div><span class="tag tag-paraphrase">Paraphrase</span> &nbsp;×1</div>
+      <div><span class="tag tag-followup">Follow-up Q</span> &nbsp;×6</div>
+      <div><span class="tag tag-personal">Personal Connection</span> &nbsp;×2</div>
+      <div><span class="tag tag-emotional">Emotional Tracking</span> &nbsp;×2</div>
+      <div><span class="tag tag-minimal">Minimal Encourager</span> &nbsp;×6</div>
+      <div><span class="tag tag-summarize">Summarizing</span> &nbsp;×1</div>
+      <div><span class="tag tag-onramp">On-Ramp</span> &nbsp;×2</div>
+      <div><span class="tag tag-circling">Circling Back</span> &nbsp;×1</div>
+      <div><span class="tag tag-memory">Specific Memory</span> &nbsp;×1</div>
+    </div>
+    <div style="margin-top:12px;font-size:8.5pt;color:#666;font-family:Arial,sans-serif;">
+      <strong>Total annotated moments: 22</strong> &nbsp;·&nbsp; Minimum required: 10 &nbsp;·&nbsp; ✓ Exceeds standard
+    </div>
+  </div>
+
+  <!-- ─── FOOTER ─── -->
+  <div class="footer-note">
+    <strong>Narrative Medicine, Unit 6 — A Life Worth Listening To</strong><br>
+    This document is a teacher-produced exemplar of Phase 2 annotation. Speaker labels were reconstructed from context; a student's submitted version should reflect their actual recording. Color-coding follows the three-category system from the project guide: verbal moves (warm tones), structural moves (green/amber), nonverbal moves (dotted underline).
+  </div>
+
+</div>
+</body>
+</html>
